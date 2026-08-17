@@ -1,0 +1,127 @@
+
+CBIO313: Data Mining and Machine Learning
+Diabetes Prediction Using Machine Learning
+Final Report
+
+By:
+Mariam Wassem
+ID: 231001582
+
+Under Supervision of:
+Dr. Mohamed EL-Sayeh
+
+Spring 2025
+
+
+ABSTRACT
+
+In this project, a machine learning model was developed to predict diabetes risk using demographic and clinical patient information. The dataset includes important features such as gender, age, hypertension, heart disease, smoking history, BMI, HbA1c level, blood glucose level, and diabetes status. The project followed a complete machine learning workflow, including data understanding, data cleaning, feature engineering, exploratory data analysis, model training, model comparison, hyperparameter tuning, model evaluation, and deployment using Streamlit.
+
+Several classification algorithms were trained and compared, including Logistic Regression, Decision Tree, Random Forest, Support Vector Machine, K-Nearest Neighbors, and Gradient Boosting. The models were evaluated using accuracy, precision, recall, F1-score, ROC AUC, confusion matrix, and classification report. The final tuned model was saved and deployed in an interactive web application that allows users to enter patient information and receive an instant diabetes risk prediction.
+
+The final model achieved strong overall performance, with high accuracy, high precision, good F1-score, and strong ROC AUC. This indicates that the model can distinguish diabetic and non-diabetic patients effectively. However, the model should be used as a screening support tool only and should not replace professional medical diagnosis.
+
+
+INTRODUCTION
+
+Diabetes is a common chronic disease that occurs when the body cannot properly regulate blood glucose levels. Early detection of diabetes risk is important because it can help patients take preventive actions, improve lifestyle habits, and seek medical evaluation before complications develop. Machine learning can support this process by analyzing multiple patient features together and identifying patterns related to diabetes risk.
+
+In this project, a diabetes prediction dataset was used to build a classification model that predicts whether a patient is likely to have diabetes. The model uses patient information such as age, gender, hypertension, heart disease, smoking history, BMI, HbA1c level, and blood glucose level. The main objective of this project is to answer the question: Can machine learning predict diabetes risk based on demographic and clinical features?
+
+This project is important because it applies data mining and machine learning techniques to a real healthcare-related problem. However, the model is not intended to replace doctors or laboratory diagnosis. Instead, it can be used as a screening support tool that helps identify patients who may require further medical evaluation.
+
+
+DATASET DESCRIPTION
+
+The dataset used in this project is the Diabetes Prediction Dataset from Kaggle. The dataset file used was diabetes_prediction_dataset.csv. It contains 100,000 patient records before cleaning and 9 original columns. Each row represents one patient, and each column represents a demographic, medical, or clinical feature.
+
+The dataset includes gender, age, hypertension, heart disease, smoking history, BMI, HbA1c level, blood glucose level, and diabetes status. The target variable is diabetes, where 1 indicates a diabetic patient and 0 indicates a non-diabetic patient.
+
+The dataset was not fully ready for modeling at the beginning. Although it did not contain missing values, it contained duplicated rows and unclear smoking history values such as No Info. Therefore, data cleaning was required before training the machine learning models. After removing duplicated rows and standardizing smoking history values, the cleaned dataset contained 96,146 records.
+
+
+METHODOLOGY
+
+The project followed a complete machine learning lifecycle from data preprocessing to deployment. The first step was loading the dataset using pandas and inspecting its structure using functions such as head(), info(), isnull().sum(), duplicated().sum(), and value_counts(). This helped identify the number of rows and columns, data types, missing values, duplicated rows, and the target distribution.
+
+During data cleaning, duplicated rows were removed to avoid repeated patient records affecting the model. The column names were standardized, and the smoking history value No Info was replaced with unknown to make the category clearer and more consistent. Missing values were checked, but the dataset did not contain missing values.
+
+Feature engineering was then performed to create new clinically meaningful variables. Age was converted into age group categories, BMI was converted into BMI category, HbA1c level was converted into HbA1c category, and blood glucose level was converted into glucose category. These new features improved interpretability and allowed the model to use both raw clinical values and categorized health-risk groups.
+
+The target column diabetes was separated from the input features. The input variables were stored in X, and the target variable was stored in y. The dataset was then split into training and testing sets using an 80/20 split with stratification. Stratification was used to preserve the ratio of diabetic and non-diabetic cases in both sets.
+
+A preprocessing pipeline was created to handle numerical and categorical features. Numerical features were scaled using StandardScaler, and categorical features were encoded using OneHotEncoder. SelectKBest was used for feature selection to keep the most relevant features for prediction.
+
+Six machine learning algorithms were trained and compared: Logistic Regression, Decision Tree, Random Forest, Support Vector Machine, K-Nearest Neighbors, and Gradient Boosting. The models were evaluated using accuracy, precision, recall, F1-score, and ROC AUC. After comparing the models, Random Forest was tuned using GridSearchCV. The final tuned model was saved as best_diabetes_model.pkl.
+
+
+RESULTS
+
+The model comparison showed that different models performed differently across the evaluation metrics. Logistic Regression achieved high recall but lower precision, meaning it detected many diabetic patients but produced more false positives. Decision Tree showed moderate performance but was less stable than ensemble models. Random Forest achieved strong accuracy, precision, F1-score, and ROC AUC. SVM achieved high recall and strong ROC AUC but lower precision. KNN showed good accuracy and precision but lower recall. Gradient Boosting achieved the highest overall performance before tuning, with very high precision and strong ROC AUC.
+
+The final tuned Random Forest model achieved an accuracy of approximately 0.969, precision of approximately 0.946, recall of approximately 0.690, F1-score of approximately 0.798, and ROC AUC of approximately 0.961. These results show that the model performs very well overall. The high precision means that most patients predicted as diabetic were actually diabetic. The recall value shows that the model detected many diabetic patients, although some diabetic cases were still missed. The high ROC AUC indicates that the model has strong ability to separate diabetic and non-diabetic patients.
+
+For the diabetic class, recall is important because it measures how many actual diabetic patients were correctly detected. Missing diabetic patients may delay diagnosis and treatment. For the non-diabetic class, the model performed very strongly, correctly classifying most non-diabetic patients. Overall, the final model is suitable as a diabetes risk screening support tool.
+
+
+VISUALIZATION AND PLOT INTERPRETATION
+
+Figure 1: Target Distribution
+The target distribution plot shows the number of diabetic and non-diabetic patients in the dataset. The dataset contains more non-diabetic patients than diabetic patients, which means the data is imbalanced. This is important because accuracy alone can be misleading. Therefore, precision, recall, F1-score, ROC AUC, confusion matrix, and classification report were used for better evaluation.
+
+Figure 2: Age Distribution
+The age distribution plot shows that the dataset includes a wide range of patient ages. This is useful because diabetes risk may vary across different age groups. The presence of older patients is especially important because diabetes risk generally increases with age.
+
+Figure 3: BMI Distribution
+The BMI distribution plot shows how body mass index values are spread across the dataset. Most patients are concentrated around normal to overweight BMI values, while some patients have higher BMI values. Since high BMI can be associated with increased diabetes risk, BMI is an important variable in the prediction model.
+
+Figure 4: HbA1c Level Distribution
+The HbA1c distribution plot shows the range of HbA1c values in the dataset. HbA1c is one of the most important clinical indicators of diabetes because it reflects long-term blood glucose control. Higher HbA1c values are expected to be strongly associated with diabetic patients.
+
+Figure 5: Blood Glucose Level Distribution
+The blood glucose distribution plot shows the spread of glucose values among patients. Some patients have high glucose levels, which may indicate diabetes risk. This variable is expected to be one of the strongest predictors because blood glucose level is directly related to diabetes diagnosis.
+
+Figure 6: Age vs Diabetes
+The age versus diabetes plot compares the age distribution between diabetic and non-diabetic patients. Diabetic patients tend to be older than non-diabetic patients. This suggests that age contributes to diabetes risk and supports the creation of the engineered age group feature.
+
+Figure 7: BMI vs Diabetes
+The BMI versus diabetes plot compares BMI values between diabetic and non-diabetic patients. Diabetic patients generally show higher BMI values. This suggests that BMI is an important risk factor and may help the model distinguish between diabetic and non-diabetic cases.
+
+Figure 8: Hypertension vs Diabetes
+The hypertension versus diabetes plot shows the relationship between hypertension and diabetes status. Diabetes appears more common proportionally among patients with hypertension. This supports the use of hypertension as an important clinical feature in the prediction model.
+
+Figure 9: Heart Disease vs Diabetes
+The heart disease versus diabetes plot shows the relationship between heart disease and diabetes status. Patients with heart disease may show a higher proportional diabetes risk. This is clinically meaningful because diabetes and cardiovascular disease can be related.
+
+Figure 10: Smoking History vs Diabetes
+The smoking history plot compares diabetes cases across different smoking categories. Smoking history alone may not be the strongest separator between diabetic and non-diabetic patients, but it can still contribute useful information when combined with other clinical variables.
+
+Figure 11: Correlation Heatmap
+The correlation heatmap shows the relationships between numerical variables. HbA1c level and blood glucose level show important relationships with diabetes, which is expected because they are direct indicators of glucose control. Age and BMI may also contribute to the target variable, but no single feature explains diabetes completely.
+
+Figure 12: Model Performance Comparison
+The model performance comparison chart compares six machine learning algorithms using accuracy, precision, recall, F1-score, and ROC AUC. Gradient Boosting achieved the highest overall performance before tuning, while Random Forest also showed strong precision and ROC AUC. The chart helps justify model selection based on multiple metrics rather than accuracy alone.
+
+Figure 13: Confusion Matrix
+The confusion matrix shows the number of correct and incorrect predictions made by the final model. The model correctly identifies most non-diabetic patients and many diabetic patients. False negatives are important because they represent diabetic patients predicted as non-diabetic. In healthcare screening, reducing false negatives is important.
+
+Figure 14: ROC Curve
+The ROC curve shows how well the final model separates diabetic and non-diabetic patients across different thresholds. The final model achieved a high ROC AUC value, indicating strong discrimination ability. This means the model can generally assign higher risk scores to diabetic patients than to non-diabetic patients.
+
+
+MODEL DEPLOYMENT
+
+The final model was deployed using Streamlit. A Streamlit web application was created to allow users to enter patient information and receive an instant prediction. The app includes input fields for gender, age, hypertension, heart disease, smoking history, BMI, HbA1c level, and blood glucose level.
+
+The application loads the saved model file best_diabetes_model.pkl and applies the same preprocessing and feature engineering steps used during training. After the user enters the required patient information and clicks the prediction button, the app displays whether the patient is predicted to have high diabetes risk or low diabetes risk. It also displays the predicted probability, making the output more informative and easier to interpret.
+
+The app was developed under the title Mariam Wassem Diabetes Prediction App. It provides an interactive and user-friendly way to demonstrate the trained machine learning model.
+
+
+CONCLUSION
+
+This project successfully demonstrated a complete machine learning workflow applied to diabetes prediction. The workflow included data loading, data cleaning, exploratory data analysis, feature engineering, preprocessing, feature selection, model comparison, hyperparameter tuning, evaluation, and deployment.
+
+The analysis showed that HbA1c level, blood glucose level, age, BMI, hypertension, heart disease, and smoking history can contribute to diabetes prediction. The final tuned model achieved strong performance, especially in terms of accuracy, precision, F1-score, and ROC AUC. However, the recall value shows that some diabetic patients may still be missed, which should be considered when interpreting the model.
+
+Overall, the model is suitable as a screening support tool that can help identify patients who may require further medical evaluation. It should not be considered a replacement for professional medical diagnosis. Future improvements could include using additional clinical features, improving feature engineering, testing more algorithms, optimizing recall, and deploying the application publicly using Streamlit Community Cloud.
